@@ -1,0 +1,98 @@
+ 
+CREATE DATABASE westministerHospitalDatabase; 
+
+
+Department table
+
+CREATE TABLE Department 
+( 
+    departmentId VARCHAR(7) NOT NULL, 
+    departmentName VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (departmentID) 
+);
+
+
+
+Diagnosis table
+ 
+CREATE TABLE Diagnosis 
+( 
+    id VARCHAR(5) NOT NULL, 
+    description VARCHAR(255) NOT NULL, 
+    PRIMARY KEY (id) 
+);
+
+
+
+Prescription table
+ 
+CREATE TABLE Prescription 
+( 
+    precId VARCHAR(5), 
+    details VARCHAR(255) NOT NULL, 
+    PRIMARY KEY (precId) 
+);
+
+
+
+Test table
+
+CREATE TABLE Test 
+( 
+    testId VARCHAR(5), 
+    description VARCHAR(255) NOT NULL, 
+    PRIMARY KEY (testId) 
+);
+
+
+
+
+Doctor table
+
+CREATE TABLE Doctor 
+( 
+    doctorId VARCHAR(7)NOT NULL, 
+    fName VARCHAR(50) NOT NULL, 
+    lName VARCHAR(50) NOT NULL, 
+    contact INT(20) NOT NULL, 
+    address VARCHAR(255) NOT NULL, 
+    department VARCHAR(6) NOT NULL, 
+    PRIMARY KEY (doctorId), 
+    FOREIGN KEY (department) REFERENCES Department(departmentId) 
+);
+
+
+Patient table
+
+CREATE TABLE Patient 
+( 
+    ssn VARCHAR(10)NOT NULL, 
+    fName VARCHAR(50) NOT NULL, 
+    lName VARCHAR(50) NOT NULL, 
+    dob DATE NOT NULL, 
+    address VARCHAR(255) NOT NULL, 
+    gender VARCHAR(10) NOT NULL, 
+    PRIMARY KEY (ssn) 
+);
+
+
+Consult table
+
+ 
+CREATE TABLE Consult 
+( 
+    consultId VARCHAR(5) NOT NULL, 
+    patientSsn VARCHAR(10) NOT NULL, 
+    doctorId VARCHAR(7) NOT NULL, 
+    dateTime DATETIME NOT NULL, 
+    typeOfConsult VARCHAR(50) NOT NULL, 
+    prescription VARCHAR(5) NOT NULL, 
+    diagnosisId VARCHAR(5) NOT NULL, 
+    test VARCHAR(5), -- Assuming this column could be null due to the prescence of blanks. 
+    PRIMARY KEY (consultId), 
+    FOREIGN KEY (patientSsn) REFERENCES Patient(ssn), 
+    FOREIGN KEY (doctorId) REFERENCES Doctor(doctorId), 
+    FOREIGN KEY (prescription) REFERENCES Prescription(precId), 
+    FOREIGN KEY (diagnosisId) REFERENCES Diagnosis(id), 
+    FOREIGN KEY (test) REFERENCES Test(testId) 
+);

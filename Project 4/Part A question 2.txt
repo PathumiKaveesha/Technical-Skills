@@ -1,0 +1,93 @@
+CREATE DATABASE informatics_dvd_rental_company;
+
+
+
+Branch table
+
+CREATE TABLE Branch
+(
+    branchNumber VARCHAR(10) NOT NULL,
+    street VARCHAR(20),
+    city VARCHAR(15),
+    state VARCHAR(15),
+    zipCode VARCHAR(10),
+    telephoneNo CHAR(15),
+    PRIMARY KEY(branchNumber)
+);
+
+
+DVD table
+
+CREATE TABLE Dvd
+(
+    catalogNumber VARCHAR(10) NOT NULL,
+    dvdNumber VARCHAR(10) NOT NULL,
+    title VARCHAR(30),
+    category VARCHAR(20) NOT NULL,
+    dailyRental FLOAT,
+    cost FLOAT,
+    status VARCHAR(15),
+    mainActors VARCHAR(30),
+    directors VARCHAR(30),
+    branchNumber VARCHAR(10) NOT NULL,
+    PRIMARY KEY (catalogNumber)
+);
+
+
+
+DVD Copy table
+
+
+CREATE TABLE DvdCopy
+(
+    dvdNumber VARCHAR(10) NOT NULL,
+    status VARCHAR(15) NOT NULL,
+    category VARCHAR(20) NOT NULL,
+    branchNumber VARCHAR(10) NOT NULL
+);
+
+
+
+Member table
+
+CREATE TABLE DvdCopy
+(
+    memberNumber VARCHAR(10) NOT NULL,
+    memberFirstName VARCHAR(40),
+    memberLastName VARCHAR(40),
+    address VARCHAR(255),
+    registrationDate DATE,
+    maxRentals INT NOT NULL,
+    PRIMARY KEY (memberNumber)
+);
+
+
+Rental details table
+
+CREATE TABLE RentalDetails
+(
+    dvdNumber VARCHAR(10) NOT NULL,
+    rentalNumber VARCHAR(10) NOT NULL,
+    memberFirstName VARCHAR(255),
+    memberLastName VARCHAR(255),
+    memberNumber VARCHAR(10) NOT NULL,
+    title VARCHAR (255),
+    dailyRental FLOAT,
+    rentedDate DATE,
+    returnedDate DATE,
+    PRIMARY KEY (dvdNumber)
+);
+
+
+Staff table
+
+CREATE TABLE Staff
+(
+    staffNumber VARCHAR(10) NOT NULL,
+    firstName VARCHAR(20),
+    familyName VARCHAR(20),
+    position VARCHAR(12),
+    address VARCHAR(255),
+    salary INT,
+    PRIMARY KEY (staffNumber)
+);
